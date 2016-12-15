@@ -29,7 +29,7 @@ function loop_documents_permission() {
 function loop_documents_field_widget_form_alter(&$element, &$form_state, $context) {
   if (isset($element['#entity'])) {
     $entity = $element['#entity'];
-    if ($entity->type === 'loop_documents_collection' && $element['#field_name'] === 'field_loop_documents_contents') {
+    if (isset($entity->type) && $entity->type === 'loop_documents_collection' && $element['#field_name'] === 'field_loop_documents_contents') {
       if (!empty($entity->field_loop_documents_contents[LANGUAGE_NONE][0]['menureference'])) {
         $menu_id = $entity->field_loop_documents_contents[LANGUAGE_NONE][0]['menureference'];
         $menu = menu_load($menu_id);
