@@ -1,0 +1,45 @@
+<?php
+/**
+ * @file
+ * Code for the Loop documents feature.
+ */
+
+include_once 'loop_documents.features.inc';
+
+/**
+ * Implements hook_permission().
+ *
+ * The permission 'administer documents' has rights to …
+ *
+ * The permission 'administer document collections' has rights to …
+ */
+function loop_documents_permission() {
+  return array(
+    'administer documents' => array(
+      'title' => t('Administer documents'),
+      // 'description' => t('@TODO Add a description'),
+    ),
+    'administer document collections' => array(
+      'title' => t('Administer document collections'),
+      // 'description' => t('@TODO Add a description'),
+    ),
+  );
+}
+
+function loop_documents_field_widget_form_alter(&$element, &$form_state, $context) {
+  if (isset($element['#entity'])) {
+    $entity = $element['#entity'];
+    if ($entity->type === 'loop_documents_collection' && $element['#field_name'] === 'field_loop_documents_contents') {
+      if (!empty($entity->field_loop_documents_contents[LANGUAGE_NONE][0]['menureference'])) {
+        $menu_id = $entity->field_loop_documents_contents[LANGUAGE_NONE][0]['menureference'];
+        $menu = menu_load($menu_id);
+        if ($menu) {
+          $element['menureference']['#description'] .= ' ' . l(t('Edit menu @menu_name', array('@menu_name' => $menu['title'])), 'admin/structure/menu/manage/' . $menu['menu_name']);
+        }
+      }
+      else {
+        $element['menureference']['#description'] .= ' ' . l(t('Create new menu'), 'admin/structure/menu/add');
+      }
+    }
+  }
+}
