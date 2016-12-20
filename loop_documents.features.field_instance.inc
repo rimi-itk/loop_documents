@@ -37,13 +37,48 @@ function loop_documents_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'body',
     'label' => 'Body',
-    'required' => FALSE,
+    'required' => 0,
     'settings' => array(
-      'display_summary' => TRUE,
-      'text_processing' => 1,
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'editor' => 'editor',
+          'html' => 'html',
+          'loop_book' => 'loop_book',
+          'loop_documents' => 'loop_documents',
+          'plain_text' => 'plain_text',
+          'simple' => 'simple',
+        ),
+        'allowed_formats_toggle' => 0,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'editor' => array(
+              'weight' => 0,
+            ),
+            'html' => array(
+              'weight' => -10,
+            ),
+            'loop_book' => array(
+              'weight' => 0,
+            ),
+            'loop_documents' => array(
+              'weight' => 0,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+            'simple' => array(
+              'weight' => -10,
+            ),
+          ),
+        ),
+      ),
+      'display_summary' => 1,
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
+      'active' => 1,
       'module' => 'text',
       'settings' => array(
         'rows' => 20,
@@ -187,14 +222,14 @@ function loop_documents_field_default_field_instances() {
     'bundle' => 'loop_documents_collection',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'A menu with documents in the collection.',
+    'description' => '',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => NULL,
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'menufield_simple_text',
-        'weight' => 1,
+        'type' => 'text_default',
+        'weight' => 9,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -206,16 +241,53 @@ function loop_documents_field_default_field_instances() {
     'entity_type' => 'node',
     'field_name' => 'field_loop_documents_contents',
     'label' => 'Contents',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'editor' => 'editor',
+          'html' => 'html',
+          'loop_book' => 'loop_book',
+          'loop_documents' => 'loop_documents',
+          'plain_text' => 'plain_text',
+          'simple' => 'simple',
+        ),
+        'allowed_formats_toggle' => 0,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'editor' => array(
+              'weight' => 0,
+            ),
+            'html' => array(
+              'weight' => -10,
+            ),
+            'loop_book' => array(
+              'weight' => 0,
+            ),
+            'loop_documents' => array(
+              'weight' => 0,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+            'simple' => array(
+              'weight' => -10,
+            ),
+          ),
+        ),
+      ),
+      'text_processing' => 0,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 0,
-      'module' => 'menufield',
-      'settings' => array(),
-      'type' => 'menufield_select',
-      'weight' => 5,
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 4,
     ),
   );
 
@@ -488,7 +560,7 @@ function loop_documents_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 31,
+      'weight' => 1,
     ),
   );
 
@@ -502,9 +574,8 @@ function loop_documents_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 1,
       ),
       'teaser' => array(
@@ -565,7 +636,6 @@ function loop_documents_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('A menu with documents in the collection.');
   t('Approval date');
   t('Approver');
   t('Author');
